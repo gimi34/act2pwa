@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Núcleo · Qué hay dentro de una computadora</title>
+  <meta name="description" content="Guía clara sobre computadoras: componentes, tipos, historia y qué equipo conviene según tu uso.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <div class="encabezado-interior">
+      <a class="marca" href="#inicio" aria-label="Núcleo, ir al inicio">
+        <span class="marca-logo"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span>
+        <span class="marca-nombre">Núcleo</span>
+      </a>
+      <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <span>Menú</span>
+      </button>
+      <nav id="menu-principal" class="menu" aria-label="Principal">
+        <ul>
+          <li><a href="#componentes">Componentes</a></li>
+          <li><a href="#funcionamiento">Cómo funciona</a></li>
+          <li><a href="#tipos">Tipos</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#guia">Guía</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section id="inicio" class="hero" aria-labelledby="hero-titulo">
+      <div class="hero-interior">
+        <div class="hero-texto">
+          <p class="rotulo rotulo-noche"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Hoja de datos · Computadoras</p>
+          <h1 id="hero-titulo">Todo lo que hay dentro de una computadora</h1>
+          <p class="hero-descripcion">Una guía sin jerga para entender cada pieza, conocer los tipos de equipos y descubrir qué te conviene según lo que vas a hacer con ella.</p>
+          <a class="boton boton-primario" href="#componentes">
+            Conocer los componentes
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+        <figure class="hero-visual">
+          <div class="hero-marco">
+            <img src="img/procesador.webp" alt="Procesador moderno con la palabra Core sobre una placa con pistas luminosas azules" width="720" height="412">
+          </div>
+          <figcaption class="hero-leyenda">El procesador, el corazón de toda computadora.</figcaption>
+        </figure>
+      </div>
+      <ul class="hero-luces" aria-label="Piezas que trabajan juntas">
+        <li class="luz luz-1"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Procesador piensa</li>
+        <li class="luz luz-2"><i class="fa-solid fa-memory" aria-hidden="true"></i> Memoria recuerda</li>
+        <li class="luz luz-3"><i class="fa-solid fa-display" aria-hidden="true"></i> Gráficos dibujan</li>
+      </ul>
+    </section>
+
+    <section class="cifras" aria-label="La guía en cifras">
+      <ul class="cifras-lista">
+        <li><span class="cifra">6</span> <span>componentes explicados</span></li>
+        <li><span class="cifra">4</span> <span>tipos de equipo</span></li>
+        <li><span class="cifra">6</span> <span>hitos de su historia</span></li>
+        <li><span class="cifra">5</span> <span>usos con recomendación</span></li>
+      </ul>
+    </section>
+
+    <section id="componentes" class="seccion" aria-labelledby="componentes-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">01 · Componentes</p>
+          <h2 id="componentes-titulo">Las piezas que hacen que todo funcione</h2>
+          <p class="seccion-intro">Cada componente tiene un trabajo. Abre “Ver más” en cada tarjeta para saber qué hace y por qué importa.</p>
+        </header>
+        <div class="tarjetas">
+          <article class="tarjeta tarjeta-destacada">
+            <img class="tarjeta-foto" src="img/procesador.webp" alt="Procesador moderno con la palabra Core sobre una placa con pistas luminosas" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span>
+              <p class="rotulo">CPU</p>
+            </div>
+            <h3>Procesador</h3>
+            <p>Es el cerebro: ejecuta las instrucciones de los programas, una tras otra, a una velocidad enorme.</p>
+            <p class="dato"><span class="dato-rotulo">Velocidad típica</span> <span class="dato-valor">2,5 a 5 GHz</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-cpu">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-cpu" class="detalle" hidden>
+              <p>Un procesador moderno reúne varios núcleos: cada uno puede encargarse de una tarea distinta al mismo tiempo. Más núcleos ayudan al editar video o al abrir muchos programas; una velocidad mayor ayuda a que cada tarea termine antes.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Cantidad de núcleos e hilos</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Velocidad en GHz</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Que sea compatible con tu placa base</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> Un procesador se calienta: por eso lleva un disipador con ventilador encima.</span></p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="tarjeta-foto" src="img/memoria-ram.webp" alt="Dos módulos de memoria RAM sobre fondo blanco" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-memory" aria-hidden="true"></i></span>
+              <p class="rotulo">RAM</p>
+            </div>
+            <h3>Memoria RAM</h3>
+            <p>Es la mesa de trabajo: guarda de forma temporal lo que estás usando para que se abra al instante.</p>
+            <p class="dato"><span class="dato-rotulo">Capacidad típica</span> <span class="dato-valor">8 a 32 GB</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-ram">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-ram" class="detalle" hidden>
+              <p>Cuando apagas la computadora, la RAM se vacía. Si te falta memoria, el equipo se vuelve lento al tener muchas pestañas o programas abiertos a la vez.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Capacidad total en GB</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Tipo (DDR4 o DDR5) compatible con tu placa</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Dos módulos iguales rinden mejor que uno</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> La RAM es miles de veces más rápida que un disco, por eso se usa de mesa de trabajo.</span></p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="tarjeta-foto" src="img/almacenamiento.webp" alt="Unidad de estado sólido con sus chips negros y su conector dorado" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i></span>
+              <p class="rotulo">SSD · HDD</p>
+            </div>
+            <h3>Almacenamiento</h3>
+            <p>Es el archivero: guarda tus programas, fotos y documentos aunque la computadora esté apagada.</p>
+            <p class="dato"><span class="dato-rotulo">Capacidad típica</span> <span class="dato-valor">256 GB a 2 TB</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-almacenamiento">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-almacenamiento" class="detalle" hidden>
+              <p>Las unidades de estado sólido (SSD) no tienen partes móviles y arrancan el sistema mucho más rápido que los discos duros (HDD), que a cambio ofrecen más espacio por menos dinero.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> SSD antes que HDD si quieres velocidad</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Capacidad según tus archivos</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Formato: 2,5 pulgadas o M.2</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> Un SSD no tiene partes que se muevan, así que resiste mejor los golpes.</span></p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="tarjeta-foto" src="img/tarjeta-grafica.webp" alt="Montón de tarjetas gráficas de distintas marcas" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+              <p class="rotulo">GPU</p>
+            </div>
+            <h3>Tarjeta gráfica</h3>
+            <p>Dibuja lo que ves en pantalla: imágenes, video y juegos en movimiento.</p>
+            <p class="dato"><span class="dato-rotulo">Memoria de video típica</span> <span class="dato-valor">4 a 16 GB</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-gpu">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-gpu" class="detalle" hidden>
+              <p>Muchos equipos traen los gráficos integrados en el procesador, suficientes para ofimática y video. Una tarjeta dedicada se vuelve útil en diseño 3D, edición de video y videojuegos exigentes.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Memoria de video (GB)</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Que tu fuente tenga potencia y conectores suficientes</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Que quepa en tu gabinete</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> Las tarjetas gráficas también se usan para tareas de cálculo, no solo para juegos.</span></p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="tarjeta-foto" src="img/placa-base.webp" alt="Placa base con zócalo del procesador, ranuras de memoria y de expansión" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span>
+              <p class="rotulo">Placa base</p>
+            </div>
+            <h3>Placa base</h3>
+            <p>Conecta todas las piezas entre sí y les reparte datos y energía.</p>
+            <p class="dato"><span class="dato-rotulo">Función</span> <span class="dato-valor">Conectar</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-placa">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-placa" class="detalle" hidden>
+              <p>Define qué procesador y qué memoria puedes instalar, y cuántas unidades o puertos admite. Es la pieza que decide cuánto podrás ampliar tu equipo en el futuro.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Zócalo compatible con tu procesador</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Cantidad de ranuras de memoria</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Puertos y ranuras M.2 disponibles</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> Los condensadores que se ven como cilindros guardan y suavizan la energía.</span></p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="tarjeta-foto" src="img/fuente-poder.webp" alt="Fuente de poder metálica con ventilador, conector de corriente y cables de colores" width="720" height="412" loading="lazy">
+            <div class="tarjeta-cabecera">
+              <span class="tarjeta-icono"><i class="fa-solid fa-plug" aria-hidden="true"></i></span>
+              <p class="rotulo">PSU</p>
+            </div>
+            <h3>Fuente de poder</h3>
+            <p>Convierte la corriente de la pared en la energía que necesita cada componente.</p>
+            <p class="dato"><span class="dato-rotulo">Potencia típica</span> <span class="dato-valor">400 a 850 W</span></p>
+            <button class="ver-mas" type="button" aria-expanded="false" aria-controls="detalle-fuente">
+              <span class="ver-mas-texto">Ver más</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="detalle-fuente" class="detalle" hidden>
+              <p>Una fuente de calidad protege al resto de las piezas. Debe tener potencia de sobra para el equipo: un equipo con tarjeta gráfica dedicada necesita más que uno de oficina.</p>
+              <h4>Qué mirar al comprar</h4>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Potencia en vatios con margen</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certificación de eficiencia</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conectores para tu tarjeta gráfica</li>
+              </ul>
+              <p class="curioso"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <span><strong>Dato curioso:</strong> Un ventilador enfría la fuente y saca el aire caliente del gabinete.</span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="funcionamiento" class="seccion seccion-alt" aria-labelledby="funcionamiento-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">02 · Cómo funciona</p>
+          <h2 id="funcionamiento-titulo">Qué pasa desde que la enciendes</h2>
+          <p class="seccion-intro">Todas las piezas trabajan en cadena. Este es el recorrido en cinco pasos.</p>
+        </header>
+        <ol class="pasos">
+          <li>
+            <span class="paso-icono"><i class="fa-solid fa-plug" aria-hidden="true"></i></span>
+            <h3>La fuente da energía</h3>
+            <p>Al pulsar el botón, la fuente de poder convierte la corriente de la pared en la que necesita cada pieza.</p>
+          </li>
+          <li>
+            <span class="paso-icono"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span>
+            <h3>La placa base reparte</h3>
+            <p>La placa base lleva esa energía y las señales a todos los componentes y los pone a comunicarse.</p>
+          </li>
+          <li>
+            <span class="paso-icono"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i></span>
+            <h3>El sistema se carga</h3>
+            <p>El procesador pide al almacenamiento el sistema operativo y lo copia a la memoria RAM para trabajar rápido.</p>
+          </li>
+          <li>
+            <span class="paso-icono"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span>
+            <h3>El procesador ejecuta</h3>
+            <p>Cada vez que abres un programa, el procesador sigue sus instrucciones y usa la RAM como mesa de trabajo.</p>
+          </li>
+          <li>
+            <span class="paso-icono"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+            <h3>La gráfica lo muestra</h3>
+            <p>La tarjeta gráfica convierte los resultados en imágenes y las envía a tu pantalla.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="tipos" class="seccion seccion-alt" aria-labelledby="tipos-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">03 · Tipos</p>
+          <h2 id="tipos-titulo">Cuatro formas de tener una computadora</h2>
+          <p class="seccion-intro">Elige una pestaña para comparar. Con el teclado usa las flechas izquierda y derecha.</p>
+        </header>
+        <div class="pestanas">
+          <div class="pestanas-lista" role="tablist" aria-label="Tipos de computadoras">
+            <button class="pestana" id="pestana-escritorio" role="tab" type="button" aria-selected="true" aria-controls="panel-escritorio"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Escritorio</button>
+            <button class="pestana" id="pestana-portatil" role="tab" type="button" aria-selected="false" aria-controls="panel-portatil" tabindex="-1"><i class="fa-solid fa-laptop" aria-hidden="true"></i> Portátil</button>
+            <button class="pestana" id="pestana-todo-en-uno" role="tab" type="button" aria-selected="false" aria-controls="panel-todo-en-uno" tabindex="-1"><i class="fa-solid fa-tv" aria-hidden="true"></i> Todo en uno</button>
+            <button class="pestana" id="pestana-mini-pc" role="tab" type="button" aria-selected="false" aria-controls="panel-mini-pc" tabindex="-1"><i class="fa-solid fa-cube" aria-hidden="true"></i> Mini PC</button>
+          </div>
+
+          <div class="panel" id="panel-escritorio" role="tabpanel" aria-labelledby="pestana-escritorio" tabindex="0">
+            <img src="img/tipo-escritorio.webp" alt="Dibujo de una computadora de escritorio con monitor, torre y teclado" width="320" height="240">
+            <div class="panel-texto">
+              <h3>Escritorio</h3>
+              <p>Monitor, torre y periféricos por separado. Es la más potente por su precio y la más fácil de ampliar o reparar.</p>
+              <p class="ideal"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <span><strong>Ideal para:</strong> Trabajo en casa u oficina, edición y juegos.</span></p>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Mejor rendimiento por precio</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Piezas fáciles de cambiar</li>
+                <li><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> Ocupa espacio y no se transporta</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel" id="panel-portatil" role="tabpanel" aria-labelledby="pestana-portatil" tabindex="0" hidden>
+            <img src="img/tipo-portatil.webp" alt="Dibujo de una computadora portátil abierta" width="320" height="240">
+            <div class="panel-texto">
+              <h3>Portátil</h3>
+              <p>Pantalla, teclado y batería en un solo cuerpo. Se lleva a todas partes y funciona sin enchufe durante horas.</p>
+              <p class="ideal"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <span><strong>Ideal para:</strong> Estudiantes, viajes y trabajo en movimiento.</span></p>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Se transporta con facilidad</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Trae batería integrada</li>
+                <li><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> Ampliarla es más difícil</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel" id="panel-todo-en-uno" role="tabpanel" aria-labelledby="pestana-todo-en-uno" tabindex="0" hidden>
+            <img src="img/tipo-todo-en-uno.webp" alt="Dibujo de una computadora todo en uno: la pantalla contiene las piezas" width="320" height="240">
+            <div class="panel-texto">
+              <h3>Todo en uno</h3>
+              <p>Las piezas viven detrás de la pantalla. Deja el escritorio limpio y con pocos cables.</p>
+              <p class="ideal"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <span><strong>Ideal para:</strong> Hogar, recepciones y oficinas con poco espacio.</span></p>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ordenada y con pocos cables</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ideal para el hogar y la oficina</li>
+                <li><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> Difícil de reparar o ampliar</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel" id="panel-mini-pc" role="tabpanel" aria-labelledby="pestana-mini-pc" tabindex="0" hidden>
+            <img src="img/tipo-mini-pc.webp" alt="Dibujo de una mini PC: una caja pequeña junto a un monitor" width="320" height="240">
+            <div class="panel-texto">
+              <h3>Mini PC</h3>
+              <p>Una caja del tamaño de un libro que se conecta a cualquier pantalla. Consume poca energía y casi no hace ruido.</p>
+              <p class="ideal"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <span><strong>Ideal para:</strong> Salas, oficinas y proyectos con poco consumo.</span></p>
+              <ul class="lista-iconos">
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ocupa muy poco espacio</li>
+                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Bajo consumo de energía</li>
+                <li><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> Menos potencia para juegos exigentes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="seccion" aria-labelledby="galeria-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">04 · Galería</p>
+          <h2 id="galeria-titulo">Las piezas, de cerca</h2>
+          <p class="seccion-intro">Pulsa una ilustración para verla ampliada.</p>
+        </header>
+        <ul class="galeria">
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Procesador" data-leyenda="Procesador: ejecuta las instrucciones de los programas.">
+              <img src="img/procesador.webp" alt="Procesador visto desde arriba, con sus patas a los cuatro lados" width="320" height="240">
+            </button>
+            <figcaption>Procesador</figcaption>
+          </figure></li>
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Memoria RAM" data-leyenda="Memoria RAM: guarda de forma temporal lo que estás usando.">
+              <img src="img/memoria-ram.webp" alt="Módulo de memoria RAM con cuatro chips" width="320" height="240">
+            </button>
+            <figcaption>Memoria RAM</figcaption>
+          </figure></li>
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Almacenamiento" data-leyenda="Almacenamiento: guarda tus archivos aunque se apague el equipo.">
+              <img src="img/almacenamiento.webp" alt="Unidad de almacenamiento de estado sólido con su conector" width="320" height="240">
+            </button>
+            <figcaption>Almacenamiento</figcaption>
+          </figure></li>
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Tarjeta gráfica" data-leyenda="Tarjeta gráfica: dibuja las imágenes que ves en pantalla.">
+              <img src="img/tarjeta-grafica.webp" alt="Tarjeta gráfica con dos ventiladores y su conector" width="320" height="240">
+            </button>
+            <figcaption>Tarjeta gráfica</figcaption>
+          </figure></li>
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Placa base" data-leyenda="Placa base: conecta todas las piezas y les reparte energía.">
+              <img src="img/placa-base.webp" alt="Placa base con zócalo del procesador, ranuras de memoria y de expansión" width="320" height="240">
+            </button>
+            <figcaption>Placa base</figcaption>
+          </figure></li>
+          <li><figure>
+            <button class="miniatura" type="button" aria-label="Ampliar: Fuente de poder" data-leyenda="Fuente de poder: convierte la corriente de la pared en energía para cada pieza.">
+              <img src="img/fuente-poder.webp" alt="Fuente de poder con ventilador y cables de salida" width="320" height="240">
+            </button>
+            <figcaption>Fuente de poder</figcaption>
+          </figure></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="historia" class="seccion seccion-alt" aria-labelledby="historia-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">05 · Historia</p>
+          <h2 id="historia-titulo">De ocupar una sala a caber en la mano</h2>
+          <p class="seccion-intro">Seis momentos que cambiaron la forma de usar computadoras.</p>
+        </header>
+        <ol class="linea-tiempo">
+          <li>
+            <p class="anio">1946</p>
+            <h3>ENIAC</h3>
+            <p>Una de las primeras computadoras electrónicas de uso general. Ocupaba una habitación entera.</p>
+          </li>
+          <li>
+            <p class="anio">1971</p>
+            <h3>Intel 4004</h3>
+            <p>El primer microprocesador comercial: todo un procesador en un solo chip.</p>
+          </li>
+          <li>
+            <p class="anio">1981</p>
+            <h3>IBM PC</h3>
+            <p>Estableció el diseño de la computadora personal que seguimos usando hoy.</p>
+          </li>
+          <li>
+            <p class="anio">1984</p>
+            <h3>Macintosh</h3>
+            <p>Popularizó la interfaz gráfica con ventanas, iconos y ratón.</p>
+          </li>
+          <li>
+            <p class="anio">1993</p>
+            <h3>Pentium</h3>
+            <p>Llevó la potencia de los procesadores a los hogares y marcó una nueva generación.</p>
+          </li>
+          <li>
+            <p class="anio">2012</p>
+            <h3>Raspberry Pi</h3>
+            <p>Una computadora completa del tamaño de una tarjeta, pensada para aprender a programar.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="guia" class="seccion seccion-noche" aria-labelledby="guia-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo rotulo-noche">06 · Guía por uso</p>
+          <h2 id="guia-titulo">¿Qué necesita tu computadora?</h2>
+          <p class="seccion-intro">Elige para qué la vas a usar. Son valores orientativos, no reglas: varían según los programas que uses.</p>
+        </header>
+        <div class="usos" role="group" aria-label="Uso principal">
+          <button class="uso" type="button" aria-pressed="true" data-uso="estudio"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Estudio</button>
+          <button class="uso" type="button" aria-pressed="false" data-uso="oficina"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Oficina</button>
+          <button class="uso" type="button" aria-pressed="false" data-uso="diseno"><i class="fa-solid fa-palette" aria-hidden="true"></i> Diseño</button>
+          <button class="uso" type="button" aria-pressed="false" data-uso="juegos"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Juegos</button>
+          <button class="uso" type="button" aria-pressed="false" data-uso="programacion"><i class="fa-solid fa-code" aria-hidden="true"></i> Programación</button>
+        </div>
+        <div id="guia-resultado" class="resultado" aria-live="polite">
+          <h3 id="guia-uso-titulo">Estudio</h3>
+          <dl class="ficha">
+            <div><dt>Procesador</dt><dd>4 núcleos o más</dd></div>
+            <div><dt>Memoria RAM</dt><dd>8 GB</dd></div>
+            <div><dt>Almacenamiento</dt><dd>256 GB SSD</dd></div>
+            <div><dt>Gráficos</dt><dd>Integrados</dd></div>
+            <div><dt>Prioridad</dt><dd>Batería y peso</dd></div>
+          </dl>
+          <p id="guia-nota" class="nota">Una portátil ligera con buena batería suele ser lo más práctico para estudiar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="preguntas" class="seccion seccion-alt" aria-labelledby="preguntas-titulo">
+      <div class="contenedor">
+        <header class="seccion-cabecera">
+          <p class="rotulo">07 · Preguntas</p>
+          <h2 id="preguntas-titulo">Dudas que todos tenemos</h2>
+          <p class="seccion-intro">Pulsa una pregunta para ver la respuesta.</p>
+        </header>
+        <div class="preguntas">
+          <details>
+            <summary>¿Cuál es la diferencia entre RAM y almacenamiento?</summary>
+            <p>La RAM guarda de forma temporal lo que usas en este momento y se vacía al apagar. El almacenamiento guarda tus archivos y programas de forma permanente. Piensa en la RAM como una mesa de trabajo y en el almacenamiento como el archivero.</p>
+          </details>
+          <details>
+            <summary>¿Qué es mejor, un SSD o un disco duro?</summary>
+            <p>El SSD es mucho más rápido y resistente a golpes; el disco duro (HDD) ofrece más espacio por menos dinero. Muchas personas usan un SSD para el sistema y los programas, y un disco duro para archivos grandes.</p>
+          </details>
+          <details>
+            <summary>¿Necesito una tarjeta gráfica dedicada?</summary>
+            <p>Para navegar, estudiar y trabajar con documentos bastan los gráficos integrados del procesador. Una tarjeta dedicada ayuda en videojuegos exigentes, diseño 3D y edición de video.</p>
+          </details>
+          <details>
+            <summary>¿Cuántos GB de RAM me convienen?</summary>
+            <p>Como referencia orientativa, 8 GB sirven para estudio y oficina, y 16 GB o más para diseño, programación y juegos. Depende de los programas que uses: revisa los requisitos de los tuyos.</p>
+          </details>
+          <details>
+            <summary>¿Puedo ampliar mi computadora después?</summary>
+            <p>En una de escritorio casi todo se puede cambiar o ampliar. En una portátil suele poder ampliarse la RAM y el almacenamiento, según el modelo. En un todo en uno o una mini PC la ampliación es más limitada.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion" aria-labelledby="contacto-titulo">
+      <div class="contenedor contacto">
+        <header class="seccion-cabecera">
+          <p class="rotulo">08 · Contacto</p>
+          <h2 id="contacto-titulo">¿Tienes una duda? Escribe y cuéntanos</h2>
+          <p class="seccion-intro">Escribe tu consulta sobre computadoras. Esta página es una demostración: el mensaje no se envía ni se guarda en ningún lugar.</p>
+        </header>
+        <form id="formulario" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" maxlength="80" autocomplete="name" aria-describedby="error-nombre">
+            <p id="error-nombre" class="error"></p>
+          </div>
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" maxlength="120" autocomplete="email" aria-describedby="error-correo">
+            <p id="error-correo" class="error"></p>
+          </div>
+          <div class="campo">
+            <label for="tema">Tema</label>
+            <select id="tema" name="tema" aria-describedby="error-tema">
+              <option value="">Elige un tema</option>
+              <option value="duda">Duda general</option>
+              <option value="compra">Qué equipo comprar</option>
+              <option value="piezas">Componentes y piezas</option>
+              <option value="otro">Otro</option>
+            </select>
+            <p id="error-tema" class="error"></p>
+          </div>
+          <div class="campo">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" maxlength="500" aria-describedby="contador error-mensaje"></textarea>
+            <p id="contador" class="contador">0 de 500 caracteres</p>
+            <p id="error-mensaje" class="error"></p>
+          </div>
+          <button class="boton boton-primario" type="submit">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            Enviar mensaje
+          </button>
+          <p id="estado" class="estado" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="visor" class="visor" aria-label="Ilustración ampliada">
+    <figure>
+      <img src="img/procesador.webp" alt="" width="320" height="240">
+      <figcaption id="visor-leyenda"></figcaption>
+    </figure>
+    <button class="cerrar" type="button">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      <span>Cerrar</span>
+    </button>
+  </dialog>
+
+  <footer class="pie">
+    <div class="contenedor pie-interior">
+      <div class="pie-marca">
+        <a class="marca" href="#inicio" aria-label="Núcleo, ir al inicio">
+          <span class="marca-logo"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span>
+          <span class="marca-nombre">Núcleo</span>
+        </a>
+        <p>Guía sobre computadoras. Actividad 2 · Elaborado por Gerardo.</p>
+      </div>
+      <nav aria-label="Secciones">
+        <ul class="pie-enlaces">
+          <li><a href="#componentes">Componentes</a></li>
+          <li><a href="#tipos">Tipos</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#guia">Guía por uso</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <p class="pie-creditos">Iconos de <a href="https://fontawesome.com" rel="noopener noreferrer">Font Awesome Free</a> (licencia CC BY 4.0). Tipografías IBM Plex (licencia OFL). Fotografías e imágenes de referencia aportadas para la actividad; pertenecen a sus respectivos autores.</p>
+    </div>
+  </footer>
+</body>
+</html>
