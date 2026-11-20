@@ -8,7 +8,7 @@ caché e iconos. El contenido y el diseño son los mismos; solo cambian `display
 |---|---|---|---|---|
 | 1 | `browser/` | browser | any | https://gimi34.github.io/act2pwa/browser/ |
 | 2 | `minimal-ui/` | minimal-ui | portrait | https://gimi34.github.io/act2pwa/minimal-ui/ |
-| 3 | `standalone/` | standalone | landscape | https://gimi34.github.io/act2pwa/standalone/ |
+| 3 | `standalone/` | standalone | portrait | https://gimi34.github.io/act2pwa/standalone/ |
 | 4 | `fullscreen/` | fullscreen | landscape | https://gimi34.github.io/act2pwa/fullscreen/ |
 
 ## Qué contiene cada versión
@@ -16,7 +16,8 @@ caché e iconos. El contenido y el diseño son los mismos; solo cambian `display
 - `manifest.json`: `name`, `short_name`, `id`, `start_url`, `scope`, `display`, `orientation`,
   `theme_color`, `background_color` e iconos (192, 512 y maskable).
 - `sw.js`: service worker. Al instalarse guarda todos los archivos en **Cache Storage**
-  (`nucleo-<carpeta>-v1`); después responde primero desde la caché (cache first), por eso
+  (`nucleo-<carpeta>-v2`); después responde primero desde la caché (cache first),
+  salvo `manifest.json`, que se pide primero a la red para que los cambios lleguen, por eso
   la app abre **sin conexión**. Al activarse borra cachés viejas de su versión.
 - `js/pwa.js`: registra el service worker, muestra el botón «Instalar app» y llena la franja
   oscura bajo el encabezado con: lo que declara el manifest (display/orientation), el modo
@@ -48,8 +49,8 @@ Abre la URL en Chrome, instala (botón «Instalar app» o menú ⋮ → *Instala
 - **minimal-ui + portrait**: ventana propia con una barra mínima (URL / atrás / recargar).
   Se mantiene vertical aunque se gire el teléfono. Según el navegador la barra puede ser muy discreta o casi igual a standalone; si no soporta
   minimal-ui, la especificación indica caer a `browser`.
-- **standalone + landscape**: ventana propia sin barra de direcciones, con barra de estado
-  del sistema. Se abre en horizontal y no vuelve a vertical al girar.
+- **standalone + portrait**: ventana propia sin barra de direcciones, con barra de estado
+  del sistema. Se mantiene vertical aunque se gire el teléfono.
 - **fullscreen + landscape**: ocupa toda la pantalla, sin barra de estado ni navegación.
   Se abre en horizontal y se queda así.
 

@@ -23,10 +23,10 @@ VERSIONES = [
     # carpeta        display        orientation  nombre corto
     ("browser",     "browser",     "any",       "Núcleo Browser"),
     ("minimal-ui",  "minimal-ui",  "portrait",  "Núcleo Minimal"),
-    ("standalone",  "standalone",  "landscape", "Núcleo Standalone"),
+    ("standalone",  "standalone",  "portrait",  "Núcleo Standalone"),
     ("fullscreen",  "fullscreen",  "landscape", "Núcleo Fullscreen"),
 ]
-VERSION_CACHE = "v1"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
+VERSION_CACHE = "v2"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
 COLOR_TEMA = "#0A1424"
 COLOR_FONDO = "#0A1424"
 
@@ -64,6 +64,17 @@ self.addEventListener("activate", (evento) => {{
 self.addEventListener("fetch", (evento) => {{
   const peticion = evento.request;
   if (peticion.method !== "GET" || new URL(peticion.url).origin !== self.location.origin) {{
+    return;
+  }}
+  // manifest.json: primero la red, para que un cambio de display/orientation llegue al teléfono.
+  if (new URL(peticion.url).pathname.endsWith("/manifest.json")) {{
+    evento.respondWith(
+      fetch(peticion).then((respuesta) => {{
+        const copia = respuesta.clone();
+        caches.open(CACHE).then((cache) => cache.put(peticion, copia));
+        return respuesta;
+      }}).catch(() => caches.match(peticion))
+    );
     return;
   }}
   evento.respondWith(

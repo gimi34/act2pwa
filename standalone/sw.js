@@ -1,7 +1,7 @@
-/* Service worker de la versión «standalone» · orientation «landscape».
+/* Service worker de la versión «standalone» · orientation «portrait».
    Estrategia: precache de todos los archivos al instalar (Cache Storage) y
    «cache first» al pedir recursos, con respaldo a la red. Así la PWA funciona sin conexión. */
-const CACHE = "nucleo-standalone-v1";
+const CACHE = "nucleo-standalone-v2";
 const ARCHIVOS = [
   "./",
   "./css/estilos.css",
@@ -58,6 +58,17 @@ self.addEventListener("activate", (evento) => {
 self.addEventListener("fetch", (evento) => {
   const peticion = evento.request;
   if (peticion.method !== "GET" || new URL(peticion.url).origin !== self.location.origin) {
+    return;
+  }
+  // manifest.json: primero la red, para que un cambio de display/orientation llegue al teléfono.
+  if (new URL(peticion.url).pathname.endsWith("/manifest.json")) {
+    evento.respondWith(
+      fetch(peticion).then((respuesta) => {
+        const copia = respuesta.clone();
+        caches.open(CACHE).then((cache) => cache.put(peticion, copia));
+        return respuesta;
+      }).catch(() => caches.match(peticion))
+    );
     return;
   }
   evento.respondWith(
