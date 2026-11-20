@@ -1,0 +1,33 @@
+/* Núcleo · ficha PWA (igual en las cuatro versiones). Usa los tokens de estilos.css. */
+.ficha-pwa {
+  background: var(--color-night);
+  color: var(--color-on-night);
+  border-bottom: var(--space-1) solid var(--color-primary);
+  font-size: var(--text-small);
+}
+.ficha-pwa-interior {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  padding-block: var(--space-3);
+}
+.ficha-pwa dl { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: 0; }
+.ficha-pwa dl div { display: flex; gap: var(--space-2); align-items: baseline; }
+.ficha-pwa dt { color: var(--color-on-night-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
+.ficha-pwa dd { margin: 0; font-weight: 600; }
+.ficha-pwa .declarado { color: var(--color-primary); font-family: var(--font-mono); }
+.ficha-pwa .boton-instalar {
+  min-height: var(--touch-min);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.ficha-pwa .boton-instalar[hidden] { display: none; }
+.ficha-pwa :focus-visible { outline: 3px solid var(--color-focus-on-night); outline-offset: 2px; }
+.sin-red .ficha-pwa { border-bottom-color: var(--color-focus-on-night); }
