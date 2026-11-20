@@ -16,14 +16,12 @@ caché e iconos. El contenido y el diseño son los mismos; solo cambian `display
 - `manifest.json`: `name`, `short_name`, `id`, `start_url`, `scope`, `display`, `orientation`,
   `theme_color`, `background_color` e iconos (192, 512 y maskable).
 - `sw.js`: service worker. Al instalarse guarda todos los archivos en **Cache Storage**
-  (`nucleo-<carpeta>-v2`); después responde primero desde la caché (cache first),
-  salvo `manifest.json`, que se pide primero a la red para que los cambios lleguen, por eso
+  (`nucleo-<carpeta>-v3`); después responde primero desde la caché (cache first),
+  salvo `manifest.json`, que se pide primero a la red para que los cambios lleguen. Por eso
   la app abre **sin conexión**. Al activarse borra cachés viejas de su versión.
-- `js/pwa.js`: registra el service worker, muestra el botón «Instalar app» y llena la franja
-  oscura bajo el encabezado con: lo que declara el manifest (display/orientation), el modo
-  real en que se abrió (`display-mode`), la orientación real de la pantalla, la conexión y el
-  estado del service worker. No fuerza nada: solo informa, sirve para explicar en la demo.
-- `index.html`: el original + `<link rel="manifest">`, `theme-color`, metas para iOS y la franja.
+- `js/pwa.js`: registra el service worker y muestra un aviso abajo cuando no hay internet;
+  al volver la conexión dice «Conexión restablecida» y desaparece a los 3 segundos.
+- `index.html`: el original + `<link rel="manifest">`, `theme-color`, metas para iOS y el aviso de conexión.
 
 ## Publicar en GitHub Pages
 
@@ -39,7 +37,7 @@ original, ejecuta lo mismo para copiar los cambios a las cuatro versiones.
 
 ## Qué esperar en la demostración (Android + Chrome)
 
-Abre la URL en Chrome, instala (botón «Instalar app» o menú ⋮ → *Instalar app* /
+Abre la URL en Chrome, instala (menú ⋮ → *Instalar app* /
 *Agregar a pantalla principal*) y abre la app **desde el icono**.
 
 - **browser + any**: se abre como pestaña normal de Chrome con barra de direcciones. El
@@ -54,7 +52,7 @@ Abre la URL en Chrome, instala (botón «Instalar app» o menú ⋮ → *Instala
 - **fullscreen + landscape**: ocupa toda la pantalla, sin barra de estado ni navegación.
   Se abre en horizontal y se queda así.
 
-La franja «Modo actual» confirma el display aplicado y «Pantalla» la orientación real.
+Para mostrar la configuración, abre `manifest.json` (o Chrome DevTools → Application → Manifest).
 
 **Variaciones normales**: iPhone/iPad (Safari) ignora `orientation` y solo soporta bien
 `standalone` (los otros modos se ven como standalone o como Safari normal); algunas tabletas o el bloqueo de rotación del sistema pueden
@@ -62,4 +60,4 @@ impedir el giro. Si pasa, muestra `manifest.json` (o Chrome DevTools → Applica
 para demostrar que la configuración es correcta y explica la diferencia.
 
 **Para probar sin conexión**: abre la app una vez con internet, activa el modo avión y vuelve
-a abrirla; la franja dirá «sin conexión (desde caché)».
+a abrirla; aparecerá el aviso «Sin conexión a internet» y la página cargará igual.

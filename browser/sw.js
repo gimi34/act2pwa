@@ -1,7 +1,7 @@
 /* Service worker de la versión «browser» · orientation «any».
    Estrategia: precache de todos los archivos al instalar (Cache Storage) y
    «cache first» al pedir recursos, con respaldo a la red. Así la PWA funciona sin conexión. */
-const CACHE = "nucleo-browser-v2";
+const CACHE = "nucleo-browser-v3";
 const ARCHIVOS = [
   "./",
   "./css/estilos.css",

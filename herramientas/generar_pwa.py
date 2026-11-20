@@ -26,7 +26,7 @@ VERSIONES = [
     ("standalone",  "standalone",  "portrait",  "Núcleo Standalone"),
     ("fullscreen",  "fullscreen",  "landscape", "Núcleo Fullscreen"),
 ]
-VERSION_CACHE = "v2"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
+VERSION_CACHE = "v3"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
 COLOR_TEMA = "#0A1424"
 COLOR_FONDO = "#0A1424"
 
@@ -96,150 +96,75 @@ self.addEventListener("fetch", (evento) => {{
 }});
 """
 
-PWA_JS = r"""/* Núcleo · PWA: registra el service worker y muestra la ficha de la versión.
-   No fuerza ninguna orientación: solo informa lo que declara el manifest
-   y lo que el dispositivo está haciendo realmente. */
+PWA_JS = r"""/* Núcleo · PWA: registra el service worker y avisa cuando no hay internet. */
 (function () {
   "use strict";
 
   /* ---------- Registro del service worker ---------- */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js", { scope: "./" }).then(function () {
-        poner("pwa-sw", "activo");
-      }).catch(function () {
-        poner("pwa-sw", "error al registrar");
-      });
-    });
-  } else {
-    poner("pwa-sw-dd", null);
-  }
-
-  function poner(id, texto) {
-    var el = document.getElementById(id);
-    if (el && texto !== null) { el.textContent = texto; }
-  }
-
-  /* ---------- Valores declarados en manifest.json ---------- */
-  var enlace = document.querySelector('link[rel="manifest"]');
-  if (enlace && window.fetch) {
-    fetch(enlace.href).then(function (r) { return r.json(); }).then(function (m) {
-      poner("pwa-display", m.display || "—");
-      poner("pwa-orientation", m.orientation || "—");
-    }).catch(function () {});
-  }
-
-  /* ---------- Modo de visualización real ---------- */
-  var modos = ["fullscreen", "standalone", "minimal-ui", "browser"];
-  function modoActual() {
-    for (var i = 0; i < modos.length; i++) {
-      if (window.matchMedia("(display-mode: " + modos[i] + ")").matches) { return modos[i]; }
-    }
-    return navigator.standalone ? "standalone" : "browser";
-  }
-  function actualizarModo() { poner("pwa-modo", modoActual()); }
-  modos.forEach(function (m) {
-    var mq = window.matchMedia("(display-mode: " + m + ")");
-    if (mq.addEventListener) { mq.addEventListener("change", actualizarModo); }
-  });
-  actualizarModo();
-
-  /* ---------- Orientación real de la pantalla ---------- */
-  function orientacionActual() {
-    if (screen.orientation && screen.orientation.type) {
-      return screen.orientation.type.indexOf("portrait") === 0 ? "vertical (portrait)" : "horizontal (landscape)";
-    }
-    return window.matchMedia("(orientation: portrait)").matches ? "vertical (portrait)" : "horizontal (landscape)";
-  }
-  function actualizarOrientacion() { poner("pwa-giro", orientacionActual()); }
-  if (screen.orientation && screen.orientation.addEventListener) {
-    screen.orientation.addEventListener("change", actualizarOrientacion);
-  }
-  window.addEventListener("resize", actualizarOrientacion);
-  actualizarOrientacion();
-
-  /* ---------- Conexión ---------- */
-  function actualizarRed() {
-    var enLinea = navigator.onLine;
-    poner("pwa-red", enLinea ? "en línea" : "sin conexión (desde caché)");
-    document.documentElement.classList.toggle("sin-red", !enLinea);
-  }
-  window.addEventListener("online", actualizarRed);
-  window.addEventListener("offline", actualizarRed);
-  actualizarRed();
-
-  /* ---------- Botón de instalación (Chrome / Edge / Android) ---------- */
-  var aviso = null;
-  var boton = document.getElementById("pwa-instalar");
-  window.addEventListener("beforeinstallprompt", function (e) {
-    e.preventDefault();
-    aviso = e;
-    if (boton) { boton.hidden = false; }
-  });
-  if (boton) {
-    boton.addEventListener("click", function () {
-      if (!aviso) { return; }
-      aviso.prompt();
-      aviso.userChoice.then(function () { aviso = null; boton.hidden = true; });
+      navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(function () {});
     });
   }
-  window.addEventListener("appinstalled", function () {
-    if (boton) { boton.hidden = true; }
-    poner("pwa-modo", modoActual() + " · instalada");
-  });
+
+  /* ---------- Aviso de conexión ---------- */
+  var aviso = document.getElementById("aviso-red");
+  var texto = document.getElementById("aviso-red-texto");
+  var temporizador = null;
+
+  function sinConexion() {
+    if (!aviso) { return; }
+    clearTimeout(temporizador);
+    aviso.classList.remove("aviso-ok");
+    texto.textContent = "Sin conexión a internet. Estás viendo la copia guardada.";
+    aviso.hidden = false;
+  }
+
+  function conConexion() {
+    if (!aviso || aviso.hidden) { return; }
+    aviso.classList.add("aviso-ok");
+    texto.textContent = "Conexión restablecida.";
+    clearTimeout(temporizador);
+    temporizador = setTimeout(function () { aviso.hidden = true; }, 3000);
+  }
+
+  window.addEventListener("offline", sinConexion);
+  window.addEventListener("online", conConexion);
+  if (!navigator.onLine) { sinConexion(); }
 })();
 """
 
-PWA_CSS = """/* Núcleo · ficha PWA (igual en las cuatro versiones). Usa los tokens de estilos.css. */
-.ficha-pwa {
+PWA_CSS = """/* Núcleo · aviso de conexión (igual en las cuatro versiones). Usa los tokens de estilos.css. */
+.aviso-red {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: max-content;
+  max-width: calc(100% - 2 * var(--space-4));
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: var(--space-1) solid var(--color-primary);
   background: var(--color-night);
   color: var(--color-on-night);
-  border-bottom: var(--space-1) solid var(--color-primary);
   font-size: var(--text-small);
+  font-weight: 600;
+  box-shadow: 0 0.5rem 1.5rem rgba(10, 20, 36, 0.35);
 }
-.ficha-pwa-interior {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2) var(--space-5);
-  padding-block: var(--space-3);
-}
-.ficha-pwa dl { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: 0; }
-.ficha-pwa dl div { display: flex; gap: var(--space-2); align-items: baseline; }
-.ficha-pwa dt { color: var(--color-on-night-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
-.ficha-pwa dd { margin: 0; font-weight: 600; }
-.ficha-pwa .declarado { color: var(--color-primary); font-family: var(--font-mono); }
-.ficha-pwa .boton-instalar {
-  min-height: var(--touch-min);
-  padding-inline: var(--space-4);
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.ficha-pwa .boton-instalar[hidden] { display: none; }
-.ficha-pwa :focus-visible { outline: 3px solid var(--color-focus-on-night); outline-offset: 2px; }
-.sin-red .ficha-pwa { border-bottom-color: var(--color-focus-on-night); }
+.aviso-red[hidden] { display: none; }
+.aviso-red i { color: var(--color-primary); }
+.aviso-red.aviso-ok { border-left-color: var(--color-success); }
+.aviso-red.aviso-ok i { color: #6FD39B; }
 """
 
-FICHA_HTML = """  <section class="ficha-pwa" aria-label="Datos de esta versión PWA">
-    <div class="contenedor ficha-pwa-interior">
-      <dl>
-        <div><dt>display</dt><dd class="declarado" id="pwa-display">{display}</dd></div>
-        <div><dt>orientation</dt><dd class="declarado" id="pwa-orientation">{orientation}</dd></div>
-        <div><dt>Modo actual</dt><dd id="pwa-modo">—</dd></div>
-        <div><dt>Pantalla</dt><dd id="pwa-giro">—</dd></div>
-        <div><dt>Conexión</dt><dd id="pwa-red">—</dd></div>
-        <div id="pwa-sw-dd"><dt>Service worker</dt><dd id="pwa-sw">—</dd></div>
-      </dl>
-      <button id="pwa-instalar" class="boton-instalar" type="button" hidden>
-        <i class="fa-solid fa-download" aria-hidden="true"></i> Instalar app
-      </button>
-    </div>
-  </section>
+FICHA_HTML = """  <div id="aviso-red" class="aviso-red" role="status" aria-live="polite" hidden>
+    <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+    <span id="aviso-red-texto"></span>
+  </div>
 """
 
 HEAD_EXTRA = """  <link rel="manifest" href="manifest.json">
@@ -292,7 +217,7 @@ def generar_version(carpeta, display, orientation, corto):
     (dest / "css" / "pwa.css").write_text(PWA_CSS, encoding="utf-8")
     (dest / "js" / "pwa.js").write_text(PWA_JS, encoding="utf-8")
 
-    # index.html: el original + manifest/meta en <head> + ficha PWA tras el encabezado.
+    # index.html: el original + manifest/meta en <head> + aviso de conexión tras el encabezado.
     html = (RAIZ / "index.html").read_text(encoding="utf-8")
     html = html.replace("<title>Núcleo · Qué hay dentro de una computadora</title>",
                         f"<title>Núcleo · PWA {display}</title>", 1)
@@ -302,7 +227,7 @@ def generar_version(carpeta, display, orientation, corto):
     html = html.replace("  </header>\n\n  <main", "  </header>\n\n"
                         + FICHA_HTML.format(display=display, orientation=orientation)
                         + "\n  <main", 1)
-    assert 'rel="manifest"' in html and "ficha-pwa" in html, "no se pudo insertar en index.html"
+    assert 'rel="manifest"' in html and "aviso-red" in html, "no se pudo insertar en index.html"
     (dest / "index.html").write_text(html, encoding="utf-8")
 
     manifest = {

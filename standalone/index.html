@@ -48,21 +48,10 @@
     </div>
   </header>
 
-  <section class="ficha-pwa" aria-label="Datos de esta versión PWA">
-    <div class="contenedor ficha-pwa-interior">
-      <dl>
-        <div><dt>display</dt><dd class="declarado" id="pwa-display">standalone</dd></div>
-        <div><dt>orientation</dt><dd class="declarado" id="pwa-orientation">portrait</dd></div>
-        <div><dt>Modo actual</dt><dd id="pwa-modo">—</dd></div>
-        <div><dt>Pantalla</dt><dd id="pwa-giro">—</dd></div>
-        <div><dt>Conexión</dt><dd id="pwa-red">—</dd></div>
-        <div id="pwa-sw-dd"><dt>Service worker</dt><dd id="pwa-sw">—</dd></div>
-      </dl>
-      <button id="pwa-instalar" class="boton-instalar" type="button" hidden>
-        <i class="fa-solid fa-download" aria-hidden="true"></i> Instalar app
-      </button>
-    </div>
-  </section>
+  <div id="aviso-red" class="aviso-red" role="status" aria-live="polite" hidden>
+    <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+    <span id="aviso-red-texto"></span>
+  </div>
 
   <main id="contenido">
     <section id="inicio" class="hero" aria-labelledby="hero-titulo">
