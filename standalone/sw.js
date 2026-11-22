@@ -1,7 +1,7 @@
 /* Service worker de la versión «standalone» · orientation «portrait».
    Estrategia: precache de todos los archivos al instalar (Cache Storage) y
    «cache first» al pedir recursos, con respaldo a la red. Así la PWA funciona sin conexión. */
-const CACHE = "nucleo-standalone-v3";
+const CACHE = "nucleo-standalone-v5";
 const ARCHIVOS = [
   "./",
   "./css/estilos.css",

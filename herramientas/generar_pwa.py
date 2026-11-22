@@ -26,7 +26,7 @@ VERSIONES = [
     ("standalone",  "standalone",  "portrait",  "Núcleo Standalone"),
     ("fullscreen",  "fullscreen",  "landscape", "Núcleo Fullscreen"),
 ]
-VERSION_CACHE = "v3"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
+VERSION_CACHE = "v5"  # súbelo (v2, v3…) cada vez que cambies archivos para renovar la caché
 COLOR_TEMA = "#0A1424"
 COLOR_FONDO = "#0A1424"
 
@@ -96,7 +96,7 @@ self.addEventListener("fetch", (evento) => {{
 }});
 """
 
-PWA_JS = r"""/* Núcleo · PWA: registra el service worker y avisa cuando no hay internet. */
+PWA_JS = r"""/* Núcleo · PWA: registra el service worker, muestra el botón de instalar y avisa cuando no hay internet. */
 (function () {
   "use strict";
 
@@ -107,30 +107,81 @@ PWA_JS = r"""/* Núcleo · PWA: registra el service worker y avisa cuando no hay
     });
   }
 
-  /* ---------- Aviso de conexión ---------- */
+  /* ---------- Aviso (conexión e instrucciones) ---------- */
   var aviso = document.getElementById("aviso-red");
   var texto = document.getElementById("aviso-red-texto");
   var temporizador = null;
 
-  function sinConexion() {
+  function mostrarAviso(mensaje, correcto, milisegundos) {
     if (!aviso) { return; }
     clearTimeout(temporizador);
-    aviso.classList.remove("aviso-ok");
-    texto.textContent = "Sin conexión a internet. Estás viendo la copia guardada.";
+    aviso.classList.toggle("aviso-ok", !!correcto);
+    texto.textContent = mensaje;
     aviso.hidden = false;
+    if (milisegundos) {
+      temporizador = setTimeout(function () { aviso.hidden = true; }, milisegundos);
+    }
+  }
+
+  function sinConexion() {
+    document.documentElement.classList.add("sin-red");
+    mostrarAviso("Sin conexión a internet. Estás viendo la copia guardada.", false, 0);
   }
 
   function conConexion() {
+    document.documentElement.classList.remove("sin-red");
     if (!aviso || aviso.hidden) { return; }
-    aviso.classList.add("aviso-ok");
-    texto.textContent = "Conexión restablecida.";
-    clearTimeout(temporizador);
-    temporizador = setTimeout(function () { aviso.hidden = true; }, 3000);
+    mostrarAviso("Conexión restablecida.", true, 3000);
   }
 
   window.addEventListener("offline", sinConexion);
   window.addEventListener("online", conConexion);
   if (!navigator.onLine) { sinConexion(); }
+
+  /* ---------- Botón «Instalar app» ---------- */
+  var boton = document.getElementById("pwa-instalar");
+  var solicitud = null;
+
+  // Si ya se abrió como app instalada (ventana propia), el botón no hace falta.
+  function yaInstalada() {
+    return navigator.standalone === true ||
+      ["standalone", "fullscreen", "minimal-ui"].some(function (modo) {
+        return window.matchMedia("(display-mode: " + modo + ")").matches;
+      });
+  }
+
+  if (boton && !yaInstalada()) { boton.hidden = false; }
+
+  // Chrome, Edge y Android avisan que la app se puede instalar: guardamos ese aviso.
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    solicitud = e;
+    if (boton) { boton.hidden = false; }
+  });
+
+  if (boton) {
+    boton.addEventListener("click", function () {
+      if (solicitud) {
+        solicitud.prompt();
+        solicitud.userChoice.then(function () { solicitud = null; });
+        return;
+      }
+      // El navegador no ofreció su ventana de instalación (iPhone, Firefox o modo browser):
+      // explicamos cómo instalar desde su menú.
+      var esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      mostrarAviso(esIOS
+        ? "Para instalar: toca Compartir y luego «Agregar a pantalla de inicio»."
+        : "Para instalar: abre el menú ⋮ del navegador y elige «Instalar app» o «Agregar a pantalla principal».",
+        true, 7000);
+    });
+  }
+
+  window.addEventListener("appinstalled", function () {
+    solicitud = null;
+    if (boton) { boton.hidden = true; }
+    mostrarAviso("App instalada. Ábrela desde su icono.", true, 4000);
+  });
 })();
 """
 
@@ -159,12 +210,40 @@ PWA_CSS = """/* Núcleo · aviso de conexión (igual en las cuatro versiones). U
 .aviso-red i { color: var(--color-primary); }
 .aviso-red.aviso-ok { border-left-color: var(--color-success); }
 .aviso-red.aviso-ok i { color: #6FD39B; }
+
+/* Botón «Instalar app»: flotante abajo a la derecha; se oculta si la app ya se abrió instalada. */
+.boton-instalar {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1.5rem rgba(10, 20, 36, 0.35);
+}
+.boton-instalar[hidden] { display: none; }
+.boton-instalar:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+/* Cuando hay un aviso o no hay internet, el aviso ocupa el lugar del botón. */
+.sin-red .boton-instalar, .aviso-red:not([hidden]) ~ .boton-instalar { display: none; }
 """
 
 FICHA_HTML = """  <div id="aviso-red" class="aviso-red" role="status" aria-live="polite" hidden>
     <i class="fa-solid fa-wifi" aria-hidden="true"></i>
     <span id="aviso-red-texto"></span>
   </div>
+  <button id="pwa-instalar" class="boton-instalar" type="button" hidden>
+    <i class="fa-solid fa-download" aria-hidden="true"></i> Instalar app
+  </button>
 """
 
 HEAD_EXTRA = """  <link rel="manifest" href="manifest.json">

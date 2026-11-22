@@ -16,10 +16,11 @@ caché e iconos. El contenido y el diseño son los mismos; solo cambian `display
 - `manifest.json`: `name`, `short_name`, `id`, `start_url`, `scope`, `display`, `orientation`,
   `theme_color`, `background_color` e iconos (192, 512 y maskable).
 - `sw.js`: service worker. Al instalarse guarda todos los archivos en **Cache Storage**
-  (`nucleo-<carpeta>-v3`); después responde primero desde la caché (cache first),
+  (`nucleo-<carpeta>-v5`); después responde primero desde la caché (cache first),
   salvo `manifest.json`, que se pide primero a la red para que los cambios lleguen. Por eso
   la app abre **sin conexión**. Al activarse borra cachés viejas de su versión.
-- `js/pwa.js`: registra el service worker y muestra un aviso abajo cuando no hay internet;
+- `js/pwa.js`: registra el service worker, muestra el botón flotante «Instalar app» (abre la ventana
+  de instalación del navegador; si el navegador no la ofrece, explica cómo instalar desde su menú) y un aviso abajo cuando no hay internet;
   al volver la conexión dice «Conexión restablecida» y desaparece a los 3 segundos.
 - `index.html`: el original + `<link rel="manifest">`, `theme-color`, metas para iOS y el aviso de conexión.
 
@@ -37,7 +38,7 @@ original, ejecuta lo mismo para copiar los cambios a las cuatro versiones.
 
 ## Qué esperar en la demostración (Android + Chrome)
 
-Abre la URL en Chrome, instala (menú ⋮ → *Instalar app* /
+Abre la URL en Chrome, instala (botón «Instalar app» o menú ⋮ → *Instalar app* /
 *Agregar a pantalla principal*) y abre la app **desde el icono**.
 
 - **browser + any**: se abre como pestaña normal de Chrome con barra de direcciones. El

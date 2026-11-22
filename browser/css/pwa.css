@@ -23,3 +23,28 @@
 .aviso-red i { color: var(--color-primary); }
 .aviso-red.aviso-ok { border-left-color: var(--color-success); }
 .aviso-red.aviso-ok i { color: #6FD39B; }
+
+/* Botón «Instalar app»: flotante abajo a la derecha; se oculta si la app ya se abrió instalada. */
+.boton-instalar {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1.5rem rgba(10, 20, 36, 0.35);
+}
+.boton-instalar[hidden] { display: none; }
+.boton-instalar:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+/* Cuando hay un aviso o no hay internet, el aviso ocupa el lugar del botón. */
+.sin-red .boton-instalar, .aviso-red:not([hidden]) ~ .boton-instalar { display: none; }

@@ -1,7 +1,7 @@
 /* Service worker de la versión «minimal-ui» · orientation «portrait».
    Estrategia: precache de todos los archivos al instalar (Cache Storage) y
    «cache first» al pedir recursos, con respaldo a la red. Así la PWA funciona sin conexión. */
-const CACHE = "nucleo-minimal-ui-v3";
+const CACHE = "nucleo-minimal-ui-v5";
 const ARCHIVOS = [
   "./",
   "./css/estilos.css",
